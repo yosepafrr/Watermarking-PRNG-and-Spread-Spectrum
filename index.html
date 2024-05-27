@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invisible Image Watermarking</title>
+    <link rel="stylesheet" href="src/output.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Staatliches&display=swap');
+
+
+        *{
+            font-family: "Nunito", sans-serif;
+        }
+
+        h1{
+            font-family: "Poppins", sans-serif;
+        }
+
+
+    </style>
+</head>
+<body class="bg-[#fafafa] mx-28">
+    <div class="flex flex-col gap-10 justify-center p-14 bg-white my-7 mx-48 rounded-xl shadow-xl text-2xl text-center border-2 border-[#7163ba]" >
+        <h1 class="bg-[#7163ba] text-white p-3 rounded-xl">Aplikasi Watermaking pada citra digital dengan metode modifikasi LSB (Least Significant Bit) dengan teknik Cover Generation</h1>
+        <h1 class="text-[#7163ba] font-bold text-2xl">Pilih tools: </h1>
+        <div class="flex gap-14 items-center justify-evenly">
+            <button id="watermarkingBtn" class="bg-[#7163ba] text-white px-6 py-2 rounded-2xl border-2 border-white hover:bg-white hover:border-[#7163ba] hover:border-2 hover:text-[#7163ba]">Invisible Image Watermarking</button>
+            <button id="extractionBtn" class="bg-[#7163ba] text-white px-6 py-2 rounded-2xl border-2 border-white hover:bg-white hover:border-[#7163ba] hover:border-2 hover:text-[#7163ba]">Invisible Watermark Extraction</button>
+        </div>
+    </div>
+    <div class="flex flex-col justify-center gap-20 my-16 mx-36">
+    <!-- LEFT ROW -->
+    <div id="leftRow" class="flex flex-col p-14 justify-between gap-5 bg-white mx-10 rounded-xl shadow-xl border-2 border-[#7163ba]">
+    <h1 class="text-4xl font-bold text-[#7163ba]">Invisible Image Watermarking</h1>
+    <div class="flex justify-between">
+        <div>
+            <label for="seedInputEmbed">Seed:</label>
+            <input class="bg-gray-100 px-5 py-2 rounded-sm outline-none border-b-2 border-b-[#7163ba] focus:border focus:border-[#7163ba]" type="text" id="seedInputEmbed" placeholder="Masukkan seed">
+        </div>
+        <div class="flex flex-col gap-5">
+            <p>Pilih gambar yang ingin di watermark</p>
+            <input class="cursor-pointer" type="file" id="imageUpload" accept="image/*">
+            <p id="oriImg"></p>
+            <div id="baseImagePreview" class="max-h-[450px] max-w-[450px]"></div>
+        </div>
+
+        <div class="flex flex-col gap-5">
+            <p>Pilih watermark</p>
+            <input class="cursor-pointer" type="file" id="watermarkUpload" accept="image/*">
+            <p id="imgWatermark"></p>
+            <div id="watermarkPreview" class="max-w-[450px] max-h-[450px]"></div>
+        </div>
+    </div>
+    <div>
+        <p id="embeddedImg"></p>
+        <canvas id="canvas" class="max-w-[450px] max-h-[450px] my-5"></canvas>
+        <button class="hidden bg-[#7163ba] text-white px-2 py-1 rounded-md border-2 border-white hover:bg-white hover:border-[#7163ba] hover:border-2 hover:text-[#7163ba]" id="downloadBtn">Download Watermarked Image</button>
+    </div>
+    </div>
+
+
+    <!-- RIGHTROW -->
+    <div id="rightRow" class="bg-white p-14 rounded-xl shadow-xl mx-10 h-[650px] border-2 border-[#7163ba] hidden">
+    <h1 class=" flex flex-col justify-center text-4xl font-bold text-[#7163ba]">Invisible Watermark Extraction</h1>
+            <div class="flex items-center gap-10">
+                <div>
+                    <label for="seedInputEkstraksi">Seed:</label>
+                    <input class="bg-gray-100 px-5 py-2 rounded-sm outline-none border-b-2 border-b-[#7163ba] focus:border focus:border-[#7163ba]" type="text" id="seedInputEkstraksi" placeholder="Masukkan seed">
+                </div>        
+                <div class="flex flex-col gap-4">
+                    <p id="pilihGambar">Pilih gambar yang ingin di ekstrak</p>
+                    <input class="" type="file" id="extractImageUpload" accept="image/*">
+                    <p id="imgWithWatermark" class="text-bold"></p>
+                    <div class="max-w-[450px] max-h-[450px] rounded-lg" id="extractedImagePreview"></div>
+                    <div id="embeddedImg"></div>
+                    <button id="extractNow" class="bg-[#7163ba] text-white px-6 py-2 rounded-2xl border-2 border-white hover:bg-white hover:border-[#7163ba] hover:border-2 hover:text-[#7163ba] hidden">Ekstrak Sekarang</button>
+                </div>
+                <div class="flex flex-col gap-4">
+                <p id="extractedWatermark" class="text-bold"></p>
+                <canvas class="max-w-[450px] max-h-[450px] rounded-lg" id="extractedWatermarkCanvas"></canvas>
+                <canvas id="canvas" style="display:none;"></canvas>   
+                </div>     
+            </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
